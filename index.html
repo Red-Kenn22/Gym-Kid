@@ -277,6 +277,39 @@ nav button[aria-current="page"]::before{content:"";position:absolute;top:0;left:
 .t-ctrl button{flex:1;min-height:56px;border-radius:14px;font-weight:700;font-size:16px;border:1px solid var(--line2);background:#162033}
 .t-ctrl button.main{background:var(--ink);color:#0b0f19;border-color:var(--ink)}
 
+.infobtn{
+  font-family:var(--display);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.06em;
+  color:var(--cyan);
+  border:1px solid rgba(6,182,212,.4);
+  background:rgba(6,182,212,.08);
+  padding:2px 7px;
+  border-radius:6px;
+  line-height:1.2;
+}
+.infobtn:active{background:rgba(6,182,212,.25)}
+.ytbtn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  width:100%;
+  min-height:46px;
+  margin-top:14px;
+  border-radius:12px;
+  background:#ff0000;
+  color:#fff;
+  font-weight:700;
+  font-size:14px;
+  text-decoration:none;
+}
+.guide-cues{list-style:none;margin-top:10px}
+.guide-cues li{padding:5px 0 5px 20px;position:relative;font-size:13.5px;color:var(--ink)}
+.guide-cues li::before{content:"";position:absolute;left:4px;top:11px;width:6px;height:6px;border-radius:50%;background:var(--cyan)}
+.guide-safe{border-left:3px solid var(--gold);background:rgba(245,158,11,.08);padding:9px 12px;border-radius:0 10px 10px 0;margin-top:12px;font-size:13px;color:#fcd9a0}
+
 @media (max-width:359px){.pc-main{grid-template-columns:88px 1fr}.ovr{font-size:64px}.stat b{font-size:17px}.stat{padding:9px 8px}.pname{font-size:15px}.btitle b{font-size:16px}.rec b{font-size:24px}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
@@ -336,15 +369,49 @@ var ATTR={
 };
 var BLOCKS=[
   {id:'iso',title:'Suspension Tuning',sub:'Tendon isometrics',attr:'pac',xp:35,
-   ex:[{id:'wall',name:'Wall sit or Spanish squat hold',sets:3,secs:45},{id:'calf',name:'Seated calf raise hold',sets:3,secs:45}],
+   ex:[
+     {id:'wall',name:'Wall sit or Spanish squat hold',sets:3,secs:45,
+      cues:['Thighs parallel to floor (90° knee angle)','Back flat against wall, no hands resting on knees','Drive through midfoot and heel to load quads statically'],
+      safety:'If your patellar tendon stings, slide up slightly to a 60° knee bend.',
+      yt:'https://www.youtube.com/watch?v=cWTZ8Am1Ee0'},
+     {id:'calf',name:'Seated calf raise hold',sets:3,secs:45,
+      cues:['Sit with knees at 90°, weight resting across lower thighs','Press onto balls of feet to parallel / neutral hold','Keep the contraction completely static for the full duration'],
+      safety:'Do not bounce at the bottom stretch; keep constant tension to protect the Achilles.',
+      yt:'https://www.youtube.com/watch?v=BxfKOyI8sUg'}
+   ],
    why:'A tendon is a spring. Long, still holds load it with no bouncing, which tells it to stay stiff. A stiffer spring wastes less energy and passes force into the ground faster, and that is where your first two steps come from. Zero impact, so the suspension gets tuned without being rattled.'},
   {id:'cardio',title:'Power Unit',sub:'Zone 2 engine',attr:'sta',xp:35,
+   cues:['Maintain a smooth cadence of 80–90 RPM on the bike','Breathe through your nose or speak full sentences (Zone 2)','Resist the temptation to sprint; this builds mitochondrial density'],
+   safety:'Zero grinding. If knees feel friction, lower the resistance and raise cadence.',
+   yt:'https://www.youtube.com/watch?v=UoJZtOMU7HQ',
    why:'Steady riding at talking pace teaches the heart to push more blood per beat and builds more mitochondria, the power stations inside muscle cells. Same fuel, bigger engine: you recover faster between sprints and still have power in the 85th minute. Going harder does not build this faster. It builds something else.'},
   {id:'core',title:'Chassis & Shielding',sub:'Cable core and upper body',attr:'phy',xp:40,
-   ex:[{id:'pallof',name:'Cable Pallof press',sets:3,reps:'10 each side',kg:true},{id:'row',name:'Seated cable row',sets:3,reps:'12',kg:true},{id:'lat',name:'Lat pulldown',sets:3,reps:'12',kg:true}],
+   ex:[
+     {id:'pallof',name:'Cable Pallof press',sets:3,reps:'10 each side',kg:true,
+      cues:['Athletic stance: feet shoulder-width, soft knees, chest up','Hold cable handle at chest, press directly forward with arms locked','Resist the cable twisting your torso—remain totally square for 2s'],
+      safety:'Control beats weight. If your hips rotate even 5 degrees, reduce the stack.',
+      yt:'https://www.youtube.com/watch?v=5aZ0IhJS8O8'},
+     {id:'row',name:'Seated cable row',sets:3,reps:'12',kg:true,
+      cues:['Chest tall, slight natural arch in lower back','Pull elbows back tight along your ribs','Squeeze shoulder blades together for 1s before controlling return'],
+      safety:'Keep torso rigid. Do not swing your lower back back and forth.',
+      yt:'https://www.youtube.com/watch?v=vwHG9Jfu4sw'},
+     {id:'lat',name:'Lat pulldown',sets:3,reps:'12',kg:true,
+      cues:['Grip slightly wider than shoulders','Pull bar smoothly down to upper chest, leading with elbows','Control the bar on the way up; never let the stack slam'],
+      safety:'Never pull behind the neck; pull only to collarbone height.',
+      yt:'https://www.youtube.com/watch?v=hnSqbBk15tw'}
+   ],
    why:'When a centre-back leans on you he is applying torque: force times lever arm, trying to spin you off the ball. The Pallof press trains your trunk to cancel that torque. Rows and pulldowns stiffen and widen the frame, so his push has less leverage. Control beats load here: a smooth rep is worth more than a heavier one.'},
   {id:'bal',title:'Sensor Calibration',sub:'Barefoot balance and touch',attr:'dri',xp:30,
-   ex:[{id:'sl',name:'Single-leg balance, eyes closed',sets:3,secs:30,sides:true},{id:'ball',name:'Stationary ball mastery',sets:1,secs:600,long:true}],
+   ex:[
+     {id:'sl',name:'Single-leg balance, eyes closed',sets:3,secs:30,sides:true,
+      cues:['Stand barefoot or in socks on flat ground','Slight bend in supporting knee; lift other knee to 90°','Close eyes and feel the foot arches and ankle micro-correct'],
+      safety:'Stay near a wall or rail so you can tap to steady yourself if needed.',
+      yt:'https://www.youtube.com/watch?v=7SF7AYh2_Yw'},
+     {id:'ball',name:'Stationary ball mastery',sets:1,secs:600,long:true,
+      cues:['Low-impact touches: sole rolls, inside-outside taps, V-drills','Keep feet light and rhythm smooth without hard cuts or pivots','Focus on soft touch and head-up scanning'],
+      safety:'Strictly stationary or walking pace—zero striking, pivoting, or hard sprint stops.',
+      yt:'https://www.youtube.com/watch?v=uBgZvWDG9yA'}
+   ],
    why:'Closing your eyes switches off your main sensor, so the position sensors in your ankle have to run the control loop on their own. A faster loop means quicker corrections when you plant, turn or get nudged. The ball work keeps your first touch calibrated while the rest of the car is in the garage.'}
 ];
 var EX={};BLOCKS.forEach(function(b){(b.ex||[]).forEach(function(e){EX[e.id]=e;});});
@@ -554,13 +621,14 @@ function renderGarage(){
       +'<button class="bhead" data-act="toggle-block" data-id="'+b.id+'" aria-expanded="'+open+'"><span class="bnum num">'+(bi+1)+'</span><span class="btitle"><b>'+esc(b.title)+'</b><small>'+esc(b.sub)+'</small></span><span class="xpchip">+'+b.xp+' '+ATTR[b.attr].code+'</span>'+ICON_CHEV+'</button><div class="bbody">';
     if(b.id==='cardio'){
       var wb=d.equip==='wattbike';
-      h+='<div class="seg2" role="group" aria-label="Machine"><button data-act="equip" data-id="wattbike" aria-pressed="'+wb+'">Wattbike</button><button data-act="equip" data-id="cross" aria-pressed="'+!wb+'">Cross-trainer</button></div>'
+      h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;"><span class="small muted">Pacing &amp; technique</span><button class="infobtn" data-act="open-guide" data-id="cardio" aria-label="How to perform Zone 2 cardio">GUIDE</button></div>'
+        +'<div class="seg2" role="group" aria-label="Machine"><button data-act="equip" data-id="wattbike" aria-pressed="'+wb+'">Wattbike</button><button data-act="equip" data-id="cross" aria-pressed="'+!wb+'">Cross-trainer</button></div>'
         +'<div class="pair"><label>Duration (min)<input inputmode="decimal" data-draft="mins" value="'+esc(d.mins)+'" placeholder="20"></label>'
         +(wb?'<label>Average watts<input inputmode="decimal" data-draft="watts" value="'+esc(d.watts)+'" placeholder="W"></label>':'<label>Resistance level<input inputmode="decimal" data-draft="level" value="'+esc(d.level)+'" placeholder="Lvl"></label>')+'</div>'
         +'<p class="tip">Talk test: you should be able to speak in full sentences the whole way. If you can’t, ease off the throttle. '+MIN_CARDIO+' minutes or more banks the XP, and 20 or more on the Wattbike goes on the record board.</p>';
     } else b.ex.forEach(function(ex){
       var rx=ex.secs?(ex.long?(ex.secs/60)+' min':ex.sets+' × '+ex.secs+' s'+(ex.sides?' each leg':'')):ex.sets+' × '+ex.reps;
-      h+='<div class="ex"><div class="exhead"><b>'+esc(ex.name)+'</b><span>'+rx+'</span></div><div class="exctl">'+setDots(ex);
+      h+='<div class="ex"><div class="exhead"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap"><b>'+esc(ex.name)+'</b><button class="infobtn" data-act="open-guide" data-id="'+ex.id+'" aria-label="How to perform '+esc(ex.name)+'">GUIDE</button></div><span>'+rx+'</span></div><div class="exctl">'+setDots(ex);
       if(ex.secs) h+='<button class="tbtn" data-act="timer" data-id="'+ex.id+'">'+ICON_PLAY+(ex.long?'10:00 timer':ex.secs+' s timer')+'</button>';
       if(ex.kg) h+='<label class="inp">kg<input inputmode="decimal" data-draft="kg.'+ex.id+'" value="'+esc(d.kg[ex.id])+'" placeholder="'+(lk[ex.id]?'last '+trimNum(lk[ex.id]):'kg')+'" aria-label="'+esc(ex.name)+' weight in kg"></label>';
       h+='</div>';
@@ -572,6 +640,30 @@ function renderGarage(){
   });
   h+='<div class="garagepad"></div><div class="cbar"><div class="cbar-in"><button class="cbtn" id="cbtn" data-act="complete"></button><div class="csub" id="csub"></div></div></div>';
   view.innerHTML=h; garageStatus();
+}
+function openGuide(id){
+  var item=null, title='';
+  if(id==='cardio'){
+    item=BLOCKS.find(function(b){return b.id==='cardio';});
+    title='Power Unit: Zone 2';
+  } else {
+    item=EX[id];
+    title=item?item.name:'';
+  }
+  if(!item) return;
+
+  var cuesHtml=(item.cues||[]).map(function(c){return '<li>'+esc(c)+'</li>';}).join('');
+  var ytUrl=item.yt||'https://www.youtube.com';
+
+  var h='<h2>'+esc(title)+'</h2>'
+    +'<ul class="guide-cues">'+cuesHtml+'</ul>'
+    +(item.safety?'<div class="guide-safe"><b>Joint Shield:</b> '+esc(item.safety)+'</div>':'')
+    +'<a href="'+ytUrl+'" target="_blank" rel="noopener noreferrer" class="ytbtn">'
+    +'<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>'
+    +'Watch Form Video (YouTube)</a>'
+    +'<div class="btnrow"><button class="btn primary" data-act="close-modal">Got it</button></div>';
+
+  openModal(h);
 }
 function garageStatus(){
   if(tab!=='garage') return;
@@ -862,6 +954,7 @@ document.addEventListener('click',function(e){
     case 'open-days': openDays(); break;
     case 'toggle-day': if(isKey(id)){ if(id in S.doses) delete S.doses[id]; else if(S.settings.dailyDoseMg>0) S.doses[id]=S.settings.dailyDoseMg; save(); openDays(); renderHub(); } break;
     case 'toggle-block': openBlock=openBlock===id?null:id; renderGarage(); break;
+    case 'open-guide': openGuide(id); break;
     case 'set': var i=+el.dataset.i, cur=S.draft.sets[id]||0; S.draft.sets[id]=cur===i+1?i:i+1; save(); buzz(15); renderGarage(); break;
     case 'equip': S.draft.equip=id==='cross'?'cross':'wattbike'; save(); renderGarage(); break;
     case 'timer': timerStart(id); break;
